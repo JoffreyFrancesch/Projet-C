@@ -48,7 +48,7 @@ void tram2(int pos_l2){
     printf("\033[%d;165H█\n",pos_l2);
   }
   if (pos_l2+1 <= 43 && pos_l2+1 >= 6){
-    printf("\033[%d;165H \n",pos_l2-1);
+    printf("\033[%d;165H \n",pos_l2+1);
   }
 }
 ////////////////////////
@@ -64,8 +64,14 @@ int main(int argc, char  *argv[]) {
     pos_l1 = pos_l1+1;
     pos_l2 = pos_l2-1;
     usleep(100000);
-
-    //tram2(43,164);
+    if (pos_l1 == 44 && pos_l2 == 5) {
+      pos_l1 =6;
+      pos_l2 = 43;
+      printf("\033[43;30H \033[6;165H \n");
+    }
+    if (pos_l1 == 14 || pos_l2 == 12) {
+      usleep(500000);
+    }
   }
 
 
