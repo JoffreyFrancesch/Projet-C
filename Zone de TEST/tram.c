@@ -27,6 +27,7 @@ void affiche_map(){
       case 'j' : printf("┴"); break;
       case 'E' : printf("█"); break;
       case 'v' : printf("┼"); break;
+      case 'm'  : printf("║"); break;
       default : printf("%c",c);
     }
   }
@@ -34,135 +35,39 @@ void affiche_map(){
   fclose(map);
 }
 ////////////////////////
-void tram1(){
-  int pos_l = 43;
-  int pos_c = 29;
-  while (pos_l != 17) {
-    printf("\033[%d;%dH█\n",pos_l,pos_c);
-    if(pos_l+1 <= 43){
-      printf("\033[%d;%dH│\n",(pos_l+1),pos_c);
-    }
-    if(pos_l == 30){
-      usleep(500000);
-    }
-    usleep(100000);
-    pos_l = pos_l-1;
+void tram1(int pos_l1){
+  if (pos_l1 <= 43) {
+    printf("\033[%d;30H█\n",pos_l1);
   }
-  pos_l = 18;
-  while(pos_c != 49){
-    printf("\033[%d;%dH█\n",pos_l,pos_c);
-    if(pos_c-1 == 29){
-      printf("\033[18;29H┌\n");
-    }
-    if(pos_c-1 >= 30) {
-      printf("\033[%d;%dH─\n",pos_l,pos_c-1);
-    }
-    if (pos_c == 40) {
-      usleep(500000);
-    }
-    usleep(100000);
-    pos_c = pos_c+1;
+  if (pos_l1-1 >= 6 && pos_l1-1 <= 43){
+    printf("\033[%d;30H \n",pos_l1-1);
   }
-  printf("\033[18;48H─\n");
-  usleep(100000);
-  pos_c = 150;
-  while (pos_c != 170) {
-      printf("\033[%d;%dH█\n",pos_l,pos_c);
-      if ((pos_c-1 > 149) && (pos_c-1 <169)) {
-        printf("\033[%d;%dH─\n",pos_l,pos_c-1);
-      }
-      if(pos_c == 158){
-        usleep(500000);
-      }
-      usleep(100000);
-      pos_c = pos_c+1;
-  }
-  pos_c = 169;
-  while (pos_l != 44) {
-    printf("\033[%d;%dH█\n",pos_l,pos_c);
-    if (pos_l-1 == 18) {
-      printf("\033[18;169H┐\n");
-    }
-    if(pos_l-1 >= 19){
-      printf("\033[%d;%dH│\n",(pos_l-1),pos_c);
-    }
-    if(pos_l == 30){
-      usleep(500000);
-    }
-    usleep(100000);
-    pos_l = pos_l+1;
-    }
-  printf("\033[43;169H│\n");
 }
-void tram2(){
-  int pos_l = 43;
-  int pos_c = 164;
-  while (pos_l != 19) {
-    printf("\033[%d;%dH█\n",pos_l,pos_c);
-    if (pos_l+1 <= 43) {
-      printf("\033[%d;%dH│\n",(pos_l+1),pos_c);
-    }
-    if (pos_l == 30){
-      usleep(500000);
-    }
-    usleep(100000);
-    pos_l = pos_l-1;
+void tram2(int pos_l2){
+  if (pos_l2 >= 6) {
+    printf("\033[%d;165H█\n",pos_l2);
   }
-  pos_l = 20;
-  while (pos_c != 149) {
-    printf("\033[%d;%dH█\n",pos_l,pos_c);
-    if(pos_c+1 == 164){
-      printf("\033[20;164H┐\n");
-    }
-    if(pos_c+1 <= 163){
-      printf("\033[%d;%dH─\n",pos_l,pos_c+1);
-    }
-    if(pos_c == 158){
-      usleep(500000);
-    }
-    usleep(100000);
-    pos_c = pos_c-1;
+  if (pos_l2+1 <= 43 && pos_l2+1 >= 6){
+    printf("\033[%d;165H \n",pos_l2-1);
   }
-  printf("\033[20;150H─\n");
-  usleep(100000);
-  pos_c = 48;
-  while (pos_c != 33) {
-    printf("\033[%d;%dH█\n",pos_l,pos_c);
-    if ((pos_c+1 > 34) && (pos_c+1 <49)) {
-      printf("\033[%d;%dH─\n",pos_l,pos_c+1);
-    }
-    if(pos_c == 40){
-      usleep(500000);
-    }
-    usleep(100000);
-    pos_c = pos_c-1;
-  }
-  pos_c = 34;
-  while (pos_l != 44) {
-    printf("\033[%d;%dH█\n",pos_l,pos_c);
-    if (pos_l-1 == 20) {
-      printf("\033[20;34H┌\n");
-    }
-    if(pos_l-1 >= 21){
-      printf("\033[%d;%dH│\n",(pos_l-1),pos_c);
-    }
-    if(pos_l == 30){
-      usleep(500000);
-    }
-    usleep(100000);
-    pos_l = pos_l+1;
-    }
-  printf("\033[43;34H│\n");
-
 }
 ////////////////////////
 
+
 int main(int argc, char  *argv[]) {
   affiche_map();
+  int pos_l1 = 6;
+  int pos_l2 = 43;
   while (1) {
-    tram1();
-    tram2();
+    tram1(pos_l1);
+    tram2(pos_l2);
+    pos_l1 = pos_l1+1;
+    pos_l2 = pos_l2-1;
+    usleep(100000);
+
+    //tram2(43,164);
   }
+
 
   printf("\033[44;0HEND\n");
   return 0;
