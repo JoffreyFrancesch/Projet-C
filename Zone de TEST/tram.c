@@ -45,7 +45,7 @@ void tram1(){
     if(pos_l == 30){
       usleep(500000);
     }
-    usleep(10000);
+    usleep(100000);
     pos_l = pos_l-1;
   }
   pos_l = 18;
@@ -60,11 +60,11 @@ void tram1(){
     if (pos_c == 40) {
       usleep(500000);
     }
-    usleep(10000);
+    usleep(100000);
     pos_c = pos_c+1;
   }
   printf("\033[18;48H─\n");
-  usleep(10000);
+  usleep(100000);
   pos_c = 150;
   while (pos_c != 170) {
       printf("\033[%d;%dH█\n",pos_l,pos_c);
@@ -74,7 +74,7 @@ void tram1(){
       if(pos_c == 158){
         usleep(500000);
       }
-      usleep(10000);
+      usleep(100000);
       pos_c = pos_c+1;
   }
   pos_c = 169;
@@ -89,12 +89,11 @@ void tram1(){
     if(pos_l == 30){
       usleep(500000);
     }
-    usleep(10000);
+    usleep(100000);
     pos_l = pos_l+1;
     }
   printf("\033[43;169H│\n");
 }
-
 void tram2(){
   int pos_l = 43;
   int pos_c = 164;
@@ -106,7 +105,7 @@ void tram2(){
     if (pos_l == 30){
       usleep(500000);
     }
-    usleep(10000);
+    usleep(100000);
     pos_l = pos_l-1;
   }
   pos_l = 20;
@@ -121,11 +120,11 @@ void tram2(){
     if(pos_c == 158){
       usleep(500000);
     }
-    usleep(10000);
+    usleep(100000);
     pos_c = pos_c-1;
   }
   printf("\033[20;150H─\n");
-  usleep(10000);
+  usleep(100000);
   pos_c = 48;
   while (pos_c != 33) {
     printf("\033[%d;%dH█\n",pos_l,pos_c);
@@ -135,7 +134,7 @@ void tram2(){
     if(pos_c == 40){
       usleep(500000);
     }
-    usleep(10000);
+    usleep(100000);
     pos_c = pos_c-1;
   }
   pos_c = 34;
@@ -150,7 +149,7 @@ void tram2(){
     if(pos_l == 30){
       usleep(500000);
     }
-    usleep(10000);
+    usleep(100000);
     pos_l = pos_l+1;
     }
   printf("\033[43;34H│\n");
