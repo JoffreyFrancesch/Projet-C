@@ -3,7 +3,7 @@
 #include <unistd.h>
 ////////////////////////////
 void affiche_map(){
-  system("clear");
+system("clear");
   FILE * map = fopen("../fichier_txt/map.txt","r");
   char c;
   while ((c = fgetc(map))!=EOF) {
@@ -83,6 +83,7 @@ void tram2(int pos_l2){
 
 
 int main(int argc, char  *argv[]) {
+  system("setterm -cursor off");// supprime l'affichage du curseur sur Linux
   affiche_map();
   int pos_l1 = 6;
   int pos_l2 = 43;
