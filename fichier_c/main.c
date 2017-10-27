@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "../fichier_h/load_map.h"
 #include "../fichier_h/menu.h"
+#include "../fichier_h/vehicules.h"
 
 int main(int argc, char *argv[]) {
   system("clear");
@@ -14,6 +15,7 @@ int main(int argc, char *argv[]) {
       case '1' :
         printf("Vous avez choisi le mode NORMAL\n");
         affiche_map();
+        mouvement();
         flag = 1;
         break;
       case '2' :

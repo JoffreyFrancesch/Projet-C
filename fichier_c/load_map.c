@@ -32,6 +32,7 @@ void affiche_map(){
       case 'j' : printf("┴"); break;
       case 'E' : printf("█"); break;
       case 'v' : printf("┼"); break;
+      case 'm'  : printf("║"); break;
       default : printf("%c",c);
     }
   }
