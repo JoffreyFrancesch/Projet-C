@@ -7,20 +7,6 @@ urbaine. Le projet est à réaliser obligatoirement en binôme (ancien & nouveau
 GNU/Linux. La simulation du trafic doit se faire comme dans la vraie vie. L’affichage doit
 être effectué uniquement sur console.
 
-Informations sur la compilation
--------------------------------
-
-Pour lancer le projet complet tapez :
-
-<p>Voici un code en C :</p>
-
-<pre><code>int main()
-{
-    printf("Hello world!\n");
-    return 0;
-}
-</code></pre>
-
 Structure du projet
 -------------------
 
@@ -48,5 +34,12 @@ Structure du projet
 
 TODO
 ----
-
-...
+[x] Menu de sélection
+[x] Affichage de la map
+[ ] Ajout de décoration à la map
+[x] Tram
+[ ] Avion
+[ ] Voiture
+[ ] Parking
+[ ] Piétons
+[ ] Feu
