@@ -34,12 +34,12 @@ Structure du projet
 
 TODO
 ----
-[x] Menu de sélection
-[x] Affichage de la map
-[ ] Ajout de décoration à la map
-[x] Tram
-[ ] Avion
-[ ] Voiture
-[ ] Parking
-[ ] Piétons
-[ ] Feu
+- [x] Menu de sélection
+- [x] Affichage de la map
+- [ ] Ajout de décoration à la map
+- [x] Tram
+- [ ] Avion
+- [ ] Voiture
+- [ ] Parking
+- [ ] Piétons
+- [ ] Feu
