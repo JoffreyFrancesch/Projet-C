@@ -2,7 +2,10 @@
 
 Sujet
 -----
-TODO
+L’objectif de ce projet est de programmer en langage C, un simulateur dynamique de circulation
+urbaine. Le projet est à réaliser obligatoirement en binôme (ancien & nouveau) sous environnement
+GNU/Linux. La simulation du trafic doit se faire comme dans la vraie vie. L’affichage doit
+être effectué uniquement sur console.
 
 Structure du projet
 -------------------
