@@ -12,6 +12,7 @@ Structure du projet
 
 * **Fichier TXT**
   * map.txt --> carte de l'aéroport
+  * map_cp.txt --> copie de la carte sans déco pour accéder au coordonnées réelle 
 
 * **Fichier .H**
   * load_map.h
