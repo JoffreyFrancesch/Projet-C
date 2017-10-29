@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 ////////////////////////////
 void affiche_map(){
 system("clear");
   FILE * map = fopen("../fichier_txt/map.txt","r");
   char c;
+  int arbre;
   while ((c = fgetc(map))!=EOF) {
     //printf("%c",c);
     switch (c) {
@@ -28,6 +30,17 @@ system("clear");
       case 'E' : printf("█"); break;
       case 'v' : printf("┼"); break;
       case 'm'  : printf("║"); break;
+      case 'P' :
+         arbre = rand()%4;
+         if (arbre == 0) {
+           printf("🌳");
+         } else if (arbre == 1) {
+           printf("🌴");
+         } else if (arbre == 2) {
+           printf("🌲");
+         } else if (arbre == 3) {
+           printf("🌵");
+         } break;
       default : printf("%c",c);
     }
   }
@@ -84,6 +97,7 @@ void tram2(int pos_l2){
 
 int main(int argc, char  *argv[]) {
   system("setterm -cursor off");// supprime l'affichage du curseur sur Linux
+  srand(time(NULL));
   affiche_map();
   int pos_l1 = 6;
   int pos_l2 = 43;
