@@ -98,7 +98,7 @@ void tram2(int pos_l2){
 int main(int argc, char  *argv[]) {
   system("setterm -cursor off");// supprime l'affichage du curseur sur Linux
   srand(time(NULL));
-  affiche_map();
+©  affiche_map();
   int pos_l1 = 6;
   int pos_l2 = 43;
   while (1) {
