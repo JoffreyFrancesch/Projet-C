@@ -155,6 +155,7 @@ listAvion newAvion(int x_pos, int y_pos, bool speed, char direction, bool danger
 int main(int argc, char  *argv[]) {
   system("setterm -cursor off");// supprime l'affichage du curseur sur Linux
   srand(time(NULL));
+  char board[43][174];
   system("printf '\e[8;44;177t'");
   affiche_map();
     }
