@@ -11,6 +11,7 @@ void affiche_map(){
   system("clear");
   FILE * map = fopen("./fichier_txt/map.txt","r");
   char c;
+  int arbre;
   while ((c = fgetc(map))!=EOF) {
     //printf("%c",c);
     switch (c) {
@@ -33,6 +34,17 @@ void affiche_map(){
       case 'E' : printf("█"); break;
       case 'v' : printf("┼"); break;
       case 'm'  : printf("║"); break;
+      case 'P' :
+         arbre = rand()%4;
+         if (arbre == 0) {
+           printf("🌳");
+         } else if (arbre == 1) {
+           printf("🌴");
+         } else if (arbre == 2) {
+           printf("🌲");
+         } else if (arbre == 3) {
+           printf("🌵");
+         } break;
       default : printf("%c",c);
     }
   }

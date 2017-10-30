@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "../fichier_h/load_map.h"
 #include "../fichier_h/menu.h"
 #include "../fichier_h/vehicules.h"
 
 int main(int argc, char *argv[]) {
   system("clear");
+  srand(time(NULL));
   affichage_menu();
   char choix;
   int flag=0;
