@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+
+#include <stdbool.h>// librairie pour utiliser un boolean
 ////////////////////////////
 void affiche_map(){
-system("clear");
+  system("clear");
   FILE * map = fopen("../fichier_txt/map.txt","r");
   char c;
   int arbre;
@@ -48,73 +50,39 @@ system("clear");
   fclose(map);
 }
 ////////////////////////
-void tram1(int pos_l1){
-  if (pos_l1 <= 43) {
-    printf("\033[0;31m\033[%d;30H█\033[0m\n",pos_l1);
-    if (pos_l1 >= 7) {
-      printf("\033[0;31m\033[%d;30H█\033[0m\n",pos_l1-1);
-    }
-    if (pos_l1 >= 8){
-      printf("\033[0;31m\033[%d;30H█\033[0m\n",pos_l1-2);
-    }
-  }
-  if (pos_l1-3 >= 6 && pos_l1-3 <= 43){
-    printf("\033[%d;30H \n",pos_l1-3);
-  }
-  if (pos_l1-2 == 41) {
-    printf("\033[41;30H \n");
-    printf("\033[0;31m\033[42;30H█\033[0m\n");
-  }
-  if (pos_l1-1 == 42) {
-    printf("\033[42;30H \n");
-    printf("\033[0;31m\033[43;30H█\033[0m\n");
-  }
-}
-void tram2(int pos_l2){
-  if (pos_l2 >= 6) {
-    printf("\033[0;31m\033[%d;165H█\033[0m\n",pos_l2);
-    if (pos_l2 <= 42) {
-      printf("\033[0;31m\033[%d;165H█\033[0m\n",pos_l2+1);
-    }
-    if (pos_l2 <= 41) {
-      printf("\033[0;31m\033[%d;165H█\033[0m\n",pos_l2+2);
-    }
-  }
-  if (pos_l2+3 <= 43 && pos_l2+3 >= 6){
-    printf("\033[%d;165H \n",pos_l2+3);
-  }
-  if (pos_l2+2 == 8) {
-    printf("\033[8;165H \n");
-    printf("\033[0;31m\033[7;165H█\033[0m\n");
-  }
-  if (pos_l2+1 == 7) {
-    printf("\033[7;165H \n");
-    printf("\033[0;31m\033[6;165H█\033[0m\n");
-  }
-}
+struct Avion {
+  char vehicule; //definie ce qui va être mis sur le terminal
+  bool vitesse; //definie la vitesse
+  unsigned short x_pos; //definie la position de la ligne
+  unsigned short y_pos; //definie la position de la colonne
+
+  Direction destination; //definie quel porte il va prendre
+
+  bool state;//<Defines if the car has to be deleted (TRUE=active, FALSE=inactive).
+  bool broken;//<Defines if the car is broken (TRUE=broken down, FALSE=intact).
+  bool hs;//<Defines if the car has broken down by itself (TRUE=broken down, FALSE=intact).
+  bool dangerous;//definie le mode de simu choisie
+
+  struct Avion *next; // pointe sur le prochain element
+};
+typedef struct Avion Avion;
+typedef Avion* listAvion;
+
+typedef enum Direction {
+  PORTE_A,
+  PORTE_B,
+  PORTE_C,
+  PORTE_D
+} Direction;
 ////////////////////////
 
 
 int main(int argc, char  *argv[]) {
   system("setterm -cursor off");// supprime l'affichage du curseur sur Linux
   srand(time(NULL));
-©  affiche_map();
-  int pos_l1 = 6;
-  int pos_l2 = 43;
-  while (1) {
-    tram1(pos_l1);
-    tram2(pos_l2);
-    pos_l1 = pos_l1+1;
-    pos_l2 = pos_l2-1;
-    usleep(100000);
-    if (pos_l1 == 44 && pos_l2 == 5) {
-      pos_l1 =6;
-      pos_l2 = 43;
-      printf("\033[43;30H \033[6;165H \n");
+  system("printf '\e[8;44;177t'");
+  affiche_map();
     }
-  /*if (pos_l1 == 14 || pos_l2 == 12) {
-      usleep(500000);
-    }*/
   }
 
 
