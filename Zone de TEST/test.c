@@ -57,6 +57,7 @@ struct Avion {
   unsigned short y_pos; //definie la position de la colonne
 
   Direction destination; //definie quel porte il va prendre
+  Section current_section;
 
   bool state;//<Defines if the car has to be deleted (TRUE=active, FALSE=inactive).
   bool broken;//<Defines if the car is broken (TRUE=broken down, FALSE=intact).
@@ -74,7 +75,81 @@ typedef enum Direction {
   PORTE_C,
   PORTE_D
 } Direction;
+
+typedef enum Section {
+  s_in_left,
+  s_out_right,
+  s_stop_A,
+  s_stop_B,
+  s_stop_C,
+  s_stop_D
+} Section;
 ////////////////////////
+char chooseDest(){ ////Choisie la destination
+  switch (rand()%4) {
+    case 0:
+      return 'A';
+      break;
+    case 1:
+      return 'B';
+      break;
+    case 2:
+      return 'C';
+      break;
+    case 3:
+      return 'D';
+      break;
+  }
+  return 'X';
+}
+
+listAvion setDest(listAvion tmpAvion){
+  switch (tmpAvion->vehicule) {
+    case 'A':
+      tmpAvion->destination = PORTE_A;
+      break;
+    case 'B':
+      tmpAvion->destination = PORTE_B;
+      break;
+    case 'C':
+      tmpAvion->destination = PORTE_C;
+      break;
+    case 'D':
+      tmpAvion->destination = PORTE_D;
+      break;
+  }
+  if(tmpCar->dangerous)
+  {
+      tmpCar->vehicle='D';
+  }
+  return tmpAvion;
+}
+
+listAvion newAvion(int x_pos, int y_pos, bool speed, char direction, bool dangerous, Section zone, listCar existingAvion){
+  Avion* avionTmp = (Avion*)malloc(sizeof(Avion));
+  avionTmp->speed = speed;
+  avionTmp->x_pos = x_pos;
+  avionTmp->y_pos = y_pos;
+  avionTmp->vehicle=direction;
+  avionTmp->current_section=zone;
+  avionTmp->state= true;
+  avionTmp->broken= false;
+  avionTmp->next=NULL;
+  avionTmp->hs=false;
+  avionTmp->dangerous=dangerous;
+  avionTmp=setDest(avionTmp);
+
+  if(existingAvion == NULL){
+    return avionTmp
+  }
+  listAvion tmp = existingAvion;
+  while (tmp->next != NULL) {
+    tmp = tmp->next;
+  }
+  tmp->next=avionTmp;
+
+  return existingAvion;
+}
 
 
 int main(int argc, char  *argv[]) {
