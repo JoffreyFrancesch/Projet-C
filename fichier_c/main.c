@@ -5,7 +5,7 @@
 #include "../fichier_h/menu.h"
 #include "../fichier_h/vehicules.h"
 
-int main(int argc, char *argv[]) {
+int main() {
   system("clear");
   srand(time(NULL));
   system("printf '\e[8;44;177t'");
