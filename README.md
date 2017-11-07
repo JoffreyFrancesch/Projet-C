@@ -12,7 +12,7 @@ Screen du Projet
 * Menu
 ![MENU](https://github.com/JoffreyFrancesch/Projet-C/blob/master/SCREEN/MENU.png "MENU")
 * Similation
-![SIMU](https://github.com/JoffreyFrancesch/Projet-C/tree/master/SCREEN.png "SIMU")
+![SIMU](https://github.com/JoffreyFrancesch/Projet-C/tree/master/SCREEN/SIMU.png "SIMU")
 Installation du projet
 ----------------------
 
