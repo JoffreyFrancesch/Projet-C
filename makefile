@@ -15,3 +15,4 @@ LANCEMENT :
 MRPROPRE :
 	rm *.o
 	rm EXEC
+	clear
