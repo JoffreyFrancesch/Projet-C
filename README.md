@@ -37,7 +37,7 @@ TODO
 ----
 - [x] Menu de sélection
 - [x] Affichage de la map
-- [ ] Ajout de décoration à la map
+- [x] Ajout de décoration à la map
 - [x] Tram
 - [ ] Avion
 - [ ] Voiture
