@@ -1,3 +1,5 @@
+#include "../fichier_h/load_map.h"
+#include "../fichier_h/vehicules.h"
 /////FONCTION TRAM GAUCHE
 void tram1(int pos_l1){
   if (pos_l1 <= 43) {
@@ -46,36 +48,32 @@ void tram2(int pos_l2){
 }
 /////FEU TRICOLORE//////
 void feu(int temps_feu){
-  switch (temps_feu) {
-    case 1:
-      printf("\033[1;32m \033[40;45H▀\033[31;152H▀\033[0m");//VERT POUR LES FEUX SUR VOIE PRINCIPALE
-      printf("\033[1;31m \033[32;46H▄\033[39;151H▀\033[0m");//ROUGE POUR LES FEUX SUR VOIE PARKING
-      break;
-    case 10:
-      printf("\033[1;33m \033[40;45H▀\033[31;152H▀\033[0m");//ORANGE POUR LES FEUX SUR VOIE PRINCIPALE
-      break;
-    case 15:
-      printf("\033[1;32m \033[40;45H▀\033[31;152H▀\033[0m");//VERT PARKING
-      printf("\033[1;33m \033[40;45H▀\033[31;152H▀\033[0m");//ROUGE PRINCIPALE
-      break;
-    case 20:
-      printf("\033[1;33m \033[40;45H▀\033[31;152H▀\033[0m");//ORANGE PARKING
-      break;
-  }
+    if(temps_feu <= 50){
+      printf("\033[1;32m \033[40;45H█\033[31;152H█\033[0m\n");//VERT POUR LES FEUX SUR VOIE PRINCIPALE
+      printf("\033[1;31m \033[32;46H█\033[39;151H█\033[0m\n");//ROUGE POUR LES FEUX SUR VOIE PARKING
+    } else if (temps_feu <= 75){
+      printf("\033[1;33m \033[40;45H█\033[31;152H█\033[0m\n");//ORANGE POUR LES FEUX SUR VOIE PRINCIPALE
+      printf("\033[1;31m \033[32;46H█\033[39;151H█\033[0m\n");//ROUGE POUR LES FEUX SUR VOIE PARKING
+    } else if (temps_feu <= 100){
+      printf("\033[1;32m \033[32;46H█\033[39;151H█\033[0m\n");//VERT PARKING
+      printf("\033[1;31m \033[40;45H█\033[31;152H█\033[0m\n");//ROUGE PRINCIPALE
+    } else if (temps_feu <= 125){
+      printf("\033[1;33m \033[32;46H█\033[39;151H█\033[0m\n");//ORANGE PARKING
+      printf("\033[1;31m \033[40;45H█\033[31;152H█\033[0m\n");//ROUGE PRINCIPALE
+    }
 }
 /////FONCTION DE MOUVEMENT
 void mouvement(){
   int pos_l1 = 6;
   int pos_l2 = 43;
   int temps_feu = 1;
-  while (1) {
+  getchar();//vide buffer
+  while (key_pressed()!=113) {
     tram1(pos_l1);
     tram2(pos_l2);
     feu(temps_feu);
     temps_feu = temps_feu + 1;
-    if (temps_feu == 25) {
-      temps_feu = 1;
-    }
+    //printf("\033[44;2HTemps feu :%d\n",temps_feu);
     pos_l1 = pos_l1+1;
     pos_l2 = pos_l2-1;
     usleep(100000);
@@ -83,6 +81,9 @@ void mouvement(){
       pos_l1 =6;
       pos_l2 = 43;
       printf("\033[43;30H \033[6;165H \n");
+    }
+    if (temps_feu == 150) {
+      temps_feu = 1;
     }
   }
 }
