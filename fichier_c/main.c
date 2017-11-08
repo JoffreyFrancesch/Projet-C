@@ -8,7 +8,7 @@
 int main() {
   system("clear");
   srand(time(NULL));
-  system("printf '\e[8;44;177t'");
+  //system("printf '\e[8;44;177t'");
   affichage_menu();
   char choix;
   int flag=0;

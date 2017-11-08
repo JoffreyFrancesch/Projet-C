@@ -46,20 +46,25 @@ void tram2(int pos_l2){
     printf("\033[0;31m\033[6;165H█\033[0m\n");
   }
 }
+/*void arret_tram(int pos_l1, int pos_l2){
+  if ((pos_l1 == 13) || (pos_l2 == 11)) {
+    usleep(500000);
+  }
+}*/
 /////FEU TRICOLORE//////
 void feu(int temps_feu){
     if(temps_feu <= 50){
-      printf("\033[1;32m \033[40;45H█\033[31;152H█\033[0m\n");//VERT POUR LES FEUX SUR VOIE PRINCIPALE
-      printf("\033[1;31m \033[32;46H█\033[39;151H█\033[0m\n");//ROUGE POUR LES FEUX SUR VOIE PARKING
+      printf("\033[1;32m \033[39;45H█\033[30;152H█\033[0m\n");//VERT POUR LES FEUX SUR VOIE PRINCIPALE
+      printf("\033[1;31m \033[31;46H█\033[38;151H█\033[0m\n");//ROUGE POUR LES FEUX SUR VOIE PARKING
     } else if (temps_feu <= 75){
-      printf("\033[1;33m \033[40;45H█\033[31;152H█\033[0m\n");//ORANGE POUR LES FEUX SUR VOIE PRINCIPALE
-      printf("\033[1;31m \033[32;46H█\033[39;151H█\033[0m\n");//ROUGE POUR LES FEUX SUR VOIE PARKING
+      printf("\033[1;33m \033[39;45H█\033[30;152H█\033[0m\n");//ORANGE POUR LES FEUX SUR VOIE PRINCIPALE
+      printf("\033[1;31m \033[31;46H█\033[38;151H█\033[0m\n");//ROUGE POUR LES FEUX SUR VOIE PARKING
     } else if (temps_feu <= 100){
-      printf("\033[1;32m \033[32;46H█\033[39;151H█\033[0m\n");//VERT PARKING
-      printf("\033[1;31m \033[40;45H█\033[31;152H█\033[0m\n");//ROUGE PRINCIPALE
+      printf("\033[1;32m \033[31;46H█\033[38;151H█\033[0m\n");//VERT PARKING
+      printf("\033[1;31m \033[39;45H█\033[30;152H█\033[0m\n");//ROUGE PRINCIPALE
     } else if (temps_feu <= 125){
-      printf("\033[1;33m \033[32;46H█\033[39;151H█\033[0m\n");//ORANGE PARKING
-      printf("\033[1;31m \033[40;45H█\033[31;152H█\033[0m\n");//ROUGE PRINCIPALE
+      printf("\033[1;33m \033[31;46H█\033[38;151H█\033[0m\n");//ORANGE PARKING
+      printf("\033[1;31m \033[39;45H█\033[30;152H█\033[0m\n");//ROUGE PRINCIPALE
     }
 }
 /////FONCTION DE MOUVEMENT
@@ -72,8 +77,12 @@ void mouvement(){
     tram1(pos_l1);
     tram2(pos_l2);
     feu(temps_feu);
+    //arret_tram(pos_l1,pos_l2);
     temps_feu = temps_feu + 1;
-    //printf("\033[44;2HTemps feu :%d\n",temps_feu);
+
+    if ((pos_l1 == 13) || (pos_l2 == 11)) {
+      usleep(500000);
+    }
     pos_l1 = pos_l1+1;
     pos_l2 = pos_l2-1;
     usleep(100000);
