@@ -113,7 +113,7 @@ void printCharacter(int c) {
 void printCharacterSpe(int c, int terrain) {
 	if (c == '$') {
 		// Replace by icon for car
-		printf("$");
+		printf("⊡");
 	} else if (c == '%') {
 		// Icon for train
 		printf(KYEL "▓" KNRM);
@@ -823,19 +823,6 @@ void activerFeux(FEUX* feux, char** occupee, MAPTAILLE taille) {
 	}
 }
 
-/*
- * Run the first time to make the traffic light bring effect
-*/
-// void initFeux(FEUX* feux, char** occupe, MSIZE size) {
-// 	FEUX* current = feux;
-// 	while (current != NULL) {
-// 		if (current->etat == 'r') {
-// 			feuxRouge(current, occupe, size);
-// 		} else if (current->etat == 'b') {
-// 			feuxBleu(current, occupe, size);
-// 		}
-// 	}
-// }
 
 /*
  * Generer list de voitures
@@ -965,6 +952,7 @@ void avancerTram(TRAM* tram, MAPTAILLE taille, int** matrice){
 					} else {
 						//Train stop for a while
 						if (checkPortee(tram->posx, 0, taille.hauteur-1) && matrice[tram->posx][tram->posy] == 'a'){
+							//system("play -q fichier_son/sonnette.wav &");
 							tram->stopTime = TRAM_STOP;
 						}
 					}
@@ -982,29 +970,6 @@ void avancerTram(TRAM* tram, MAPTAILLE taille, int** matrice){
 		tram = tram->next;
 	}
 }
-
-// int menu() {
-// 	int c;
-// 	do {
-// 		char* input = malloc(10 * sizeof(char));
-// 		c = 0;
-// 		printf("Choisir mode de jeu:\n");
-// 		printf("1: mode fluide\n");
-// 		printf("2: mode danger\n");
-// 		printf("Voitre choix: ");
-// 		scanf("%s", input);
-// 		if (!isdigit(*input)) {
-// 			printf("Votre choix n'est pas valide. Re-saisir encore\n");
-// 		} else {
-// 			c = atoi(input);
-// 			printf("C:%d\n", c);
-// 			if (c != 1 && c != 2) {
-// 				printf("Votre choix n'est pas valide. Re-saisir encore\n");
-// 			}
-// 		}
-// 	} while (c != 1 && c != 2);
-// 	return c;
-// }
 
 /*
  * Create plane with width 11 and height 2. First position lie at 't' character

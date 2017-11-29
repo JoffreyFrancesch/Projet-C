@@ -59,7 +59,7 @@ int main() {
     if(mode == 1){
       nombre_Voitures = 20;
     } else if (mode == 2){
-      nombre_Voitures = 60;
+      nombre_Voitures = 40;
     }
   initierMatrice(matrice, fichier, taille);
   CALCUL_POINT_ALEATOIRE* calcul = calculEntrees(matrice, taille);
@@ -71,7 +71,7 @@ int main() {
   TRAM* listeTram = CreerTram(matrice, taille);
 	AVION* avion = CreerAvion(matrice, taille);
 
-  
+
   afficherPlan3(matrice, taille, setupVoitures, listeFeux, listeTram, avion);
   //for (i = 0; i < 2000; i++) {
   do {
