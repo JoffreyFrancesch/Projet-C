@@ -6,14 +6,14 @@ MAPTAILLE getTaille(char* filename) {
 	int c;
 
 	fichier = fopen(filename, "r");
-	printf("%s\n",filename);
+
 	taille.hauteur = 0;
 	taille.largeur = 0;
-	printf("OK\n");
+
 	if (fichier == NULL) printf("ERREUR\n");
 
 	while ((c = fgetc(fichier)) != EOF) {
-		printf("OK-While\n");
+		
 		if (taille.hauteur == 0) {
 			taille.largeur++;
 		}

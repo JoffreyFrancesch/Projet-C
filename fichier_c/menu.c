@@ -38,34 +38,3 @@ printf("\033[33;20H║                        \033[1;30m|>>>>>>||               
 printf("\033[34;20H║                        \033[1;30m`\\<<<<</'                            `\\>>>>>/'\033[0m                         ║\n");
 printf("\033[35;20H╚═══════════════════════════════════════════════════════════════════════════════════════════════╝\n");
 }
-
-int menu(){
-  affichage_menu();
-  char choix;
-  int mode;
-  int flag=0;
-  while (flag!=1) {
-    scanf("%c",&choix);
-    switch (choix) {
-      case '1' :
-        printf("Vous avez choisi le mode NORMAL\n");
-        flag = 1;
-        mode = 1;
-        return mode;
-        break;
-      case '2' :
-        printf("Vous avez choisi le mode DANGER\n");
-        flag = 1;
-        mode = 2;
-        return mode;
-        break;
-      case '3' :
-        printf("Vous avez quittez\n");
-        flag = 1;
-        return 0;
-        break;
-      default :
-        printf("Choix inconnu\n");
-    }
-  }
-}
