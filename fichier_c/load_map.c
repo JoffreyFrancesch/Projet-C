@@ -1,55 +1,47 @@
 #include "../fichier_h/load_map.h"
 
-typedef struct wagon {
-  int pos_l,pos_c;
-  struct wagon *succ;
-}wagon;
+MAPTAILLE getTaille(char* filename) {
+	FILE *fichier=NULL;
+	MAPTAILLE taille;
+	int c;
 
-typedef wagon *tram;
+	fichier = fopen(filename, "r");
+	printf("%s\n",filename);
+	taille.hauteur = 0;
+	taille.largeur = 0;
+	printf("OK\n");
+	if (fichier == NULL) printf("ERREUR\n");
 
-void affiche_map(){
-  system("clear");
-  FILE * map = fopen("./fichier_txt/map.txt","r");
-  char c;
-  int arbre;
-  while ((c = fgetc(map))!=EOF) {
-    //printf("%c",c);
-    switch (c) {
-      case 'H' : printf("═"); break;
-      case 'V' : printf("║"); break;
-      case 'T' : printf("─"); break;
-      case 'A' : printf("╔"); break;
-      case 'B' : printf("╚"); break;
-      case 'C' : printf("╝"); break;
-      case 'D' : printf("╗"); break;
-      case 'b' : printf("│"); break;
-      case 'x' : printf("┐"); break;
-      case 'y' : printf("┌"); break;
-      case 'z' : printf("└"); break;
-      case 'w' : printf("┘"); break;
-      case 'S' : printf("┬"); break;
-      case 'F' : printf("┤"); break;
-      case 'f' : printf("├"); break;
-      case 'j' : printf("┴"); break;
-      case 'E' : printf("█"); break;
-      case 'v' : printf("┼"); break;
-      case 'm'  : printf("║"); break;
-      case 'P' :
-         arbre = rand()%4;
-         if (arbre == 0) {
-           printf("🌳");
-         } else if (arbre == 1) {
-           printf("🌴");
-         } else if (arbre == 2) {
-           printf("🌲");
-         } else if (arbre == 3) {
-           printf("🌵");
-         } break;
-      default : printf("%c",c);
-    }
-  }
-  printf("\n");
-  fclose(map);
+	while ((c = fgetc(fichier)) != EOF) {
+		printf("OK-While\n");
+		if (taille.hauteur == 0) {
+			taille.largeur++;
+		}
+		if (c == '\n') {
+			taille.hauteur++;
+		}
+	}
+	taille.hauteur++;
+	taille.largeur--;
+	fclose(fichier);
+	return taille;
+}
+
+void initierMatrice(int** matrice, char* filename, MAPTAILLE taille) {
+	FILE *fichier;
+	int c;
+	int i = 0, j = 0;
+	fichier = fopen(filename, "r");
+	while ((c = fgetc(fichier)) != EOF) {
+		if (c == '\n') {
+			j = 0;
+			i++;
+		} else {
+			matrice[i][j] = c;
+			j++;
+		}
+	}
+	fclose(fichier);
 }
 
 char key_pressed() {
@@ -73,8 +65,3 @@ char key_pressed() {
 	}
 	return result;
 }
-/*void temps(double seconde){
-    seconde*=1000000;
-    fflush(stdout);
-    usleep(seconde);
-}*/

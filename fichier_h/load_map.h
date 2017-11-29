@@ -5,5 +5,14 @@
 #include <termios.h>
 #include <fcntl.h>
 
-void affiche_map();
+typedef struct mapTaille MAPTAILLE;
+
+struct mapTaille {
+	int hauteur, largeur;
+};
+
+
+MAPTAILLE getTaille(char *filename);
+void initierMatrice(int** matrice, char* filename, MAPTAILLE taille);
+
 char key_pressed();
