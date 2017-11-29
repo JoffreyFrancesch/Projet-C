@@ -1,10 +1,10 @@
 #include "../fichier_h/vehicule.h"
 
-#define KNRM  "\x1B[0m"
-#define KRED  "\x1B[31m"
-#define KYEL  "\x1B[33m"
-#define KBLU  "\x1B[34m"
-#define KGRN  "\x1B[32m"
+#define NRM  "\033[0m"
+#define RED  "\033[31m"
+#define YEL  "\033[33m"
+#define BLU  "\033[34m"
+#define GRN  "\033[32m"
 
 int FEUX_DUREE = 15;
 int TEMPS_ATTENTE = 4;
@@ -57,7 +57,6 @@ char checkPortee(int num, int a, int b) {
 }
 
 void printCharacter(int c) {
-	int arbre;
 	switch (c) {
       	case 'H' : printf("═"); break;
       	case 'V' : printf("║"); break;
@@ -80,7 +79,7 @@ void printCharacter(int c) {
       	case 'v' : printf("┼"); break;
       	case 'm' : printf("║"); break;
       	case 'G' : printf("▒"); break;
-      	case 'P' : printf(KGRN "♣" KNRM); break;
+      	case 'P' : printf(GRN "♣" NRM); break;
         case 'l':
         case 'r':
         case 'u':
@@ -89,19 +88,20 @@ void printCharacter(int c) {
         case 'h':
         case 'i':
         case 'k':
-        case 'a':
-        	printf(" ");
+
+        	printf("\033[47m \033[0m");
         	break;
         case 'Q':
         case 'A':
         case 's':
+				case 'a':
         	printf(" ");
         	break;
         case 'R':// Feux rouge
-        	printf(KRED "█" KNRM);
+        	printf(RED "█" NRM);
         	break;
         case 'B':// Feux bleu
-        	printf(KBLU "█" KNRM);
+        	printf(BLU "█" NRM);
         	break;
       default : printf("%c",c);
     }
@@ -112,11 +112,11 @@ void printCharacter(int c) {
 */
 void printCharacterSpe(int c, int terrain) {
 	if (c == '$') {
-		// Replace by icon for car
-		printf("⊡");
+		//Icon for car
+		printf(RED "\033[47m⊡" NRM);
 	} else if (c == '%') {
 		// Icon for train
-		printf(KYEL "▓" KNRM);
+		printf(YEL "▓" NRM);
 	} else {
 		printCharacter(c);
 	}
