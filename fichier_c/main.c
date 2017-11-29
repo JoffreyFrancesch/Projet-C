@@ -12,7 +12,7 @@ int main() {
   int i, j;
   char* fichier = "fichier_txt/map_cp.txt";
 
-  printf("OK\n");
+  
 
   MAPTAILLE taille = getTaille(fichier);
 
@@ -50,6 +50,7 @@ int main() {
         case '3' :
           printf("Vous avez quittez\n");
           flag = 1;
+	  return 0;
           break;
         default :
           printf("Choix inconnu\n");
@@ -58,7 +59,7 @@ int main() {
     int nombre_Voitures;
     if(mode == 1){
       nombre_Voitures = 20;
-    } else if (mode == 2){
+    } else {
       nombre_Voitures = 40;
     }
   initierMatrice(matrice, fichier, taille);

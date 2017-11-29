@@ -15,5 +15,5 @@ LANCEMENT :
 	./EXEC
 MRPROPRE :
 	rm *.o
-	rm RUN
+	rm EXEC
 	clear
