@@ -5,6 +5,7 @@
 #define YEL  "\033[33m"
 #define BLU  "\033[34m"
 #define GRN  "\033[32m"
+#define BLK  "\033[30m"
 
 int FEUX_DUREE = 15;
 int TEMPS_ATTENTE = 4;
@@ -112,7 +113,9 @@ void printCharacterSpe(int c, int terrain) {
 	} else if (c == '%') {
 		// Icone pour le tram
 		printf(YEL "▓" NRM);
-	} else {//afficher caractère non voiture et non tram
+  } else if (c == '!'){
+    printf(BLK "\033[47m✟" NRM);
+  } else {//afficher caractère non voiture et non tram
 		printCharacter(c);
 	}
 }
@@ -161,7 +164,11 @@ void afficherPlanFinal(int** matrice, MAPTAILLE taille, VOITURE* voitures, FEUX*
 	VOITURE* voiture = voitures;
 	while (voiture != NULL) {
 		if (voiture->posx >= 0 && voiture->posy >= 0) {
+      if(voiture->etat == 'p'){
+          planAAficher[voiture->posx][voiture->posy] = '!';
+      } else {
 			planAAficher[voiture->posx][voiture->posy] = '$';
+    }
 		}
 		voiture = voiture->next;
 	}

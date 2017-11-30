@@ -75,7 +75,7 @@ int main() {
   TRAM* listeTram = CreerTram(matrice, taille);
 	AVION* avion = CreerAvion(matrice, taille);
 
-
+  // system("clear");
   afficherPlanFinal(matrice, taille, setupVoitures, listeFeux, listeTram, avion);
   do {
     usleep(200000);
@@ -83,15 +83,15 @@ int main() {
     deplacementAvion(avion, taille);
     deplacementVoiture(setupVoitures, calcul, matrice, occupee, taille, mode);
     activerFeux(listeFeux, occupee, taille);
-    system("c                                             lear");
+    system("clear");
     afficherPlanFinal(matrice, taille, setupVoitures, listeFeux, listeTram, avion);
     printf("\033[5;40;1;31m\033[44;1H TAPEZ 'q' pour quitter\033[0m\n");
 } while(key_pressed()!=113);
 
-  for (i = 0; i < taille.hauteur; i++) {
-		free(matrice[i]);
-	}
-	free(matrice);
+  // for (i = 0; i < taille.hauteur; i++) {
+	// 	free(matrice[i]);
+	// }
+	// free(matrice);
 
   system("clear");
   menu_quitter();
