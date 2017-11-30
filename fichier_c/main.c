@@ -55,6 +55,11 @@ int main() {
           usleep(5000000);
 	        return 0;
           break;
+        case '4' :
+          printf("EASTER EGG\n");
+          mode = 4;
+          flag = 1;
+          break;
         default :
           printf("Choix inconnu\n");
       }
@@ -62,6 +67,8 @@ int main() {
     int nombre_Voitures;
     if(mode == 1){
       nombre_Voitures = 20;
+    } else if(mode == 4) {
+      nombre_Voitures = 60;
     } else {
       nombre_Voitures = 40;
     }

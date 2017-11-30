@@ -754,7 +754,7 @@ void deplacementVoiture(VOITURE* voitures, CALCUL_POINT_ALEATOIRE* listeEntrees,
 		if (voiture->posx >= 0 && voiture->posy >= 0) {
 			int direction = matrice[voiture->posx][voiture->posy];
 			if (voiture->etat != 'p') {
-				if (Panne() && mode == 2) {
+				if (Panne() && (mode == 2 || mode == 4)) {
 					voiture->etat = 'p';
 					occupee[voiture->posx][voiture->posy] = 2;
 					voiture->tempsPanne = PANNE_DUREE;
