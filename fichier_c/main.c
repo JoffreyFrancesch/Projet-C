@@ -83,7 +83,7 @@ int main() {
     deplacementAvion(avion, taille);
     deplacementVoiture(setupVoitures, calcul, matrice, occupee, taille, mode);
     activerFeux(listeFeux, occupee, taille);
-    system("Clear");
+    system("c                                             lear");
     afficherPlanFinal(matrice, taille, setupVoitures, listeFeux, listeTram, avion);
     printf("\033[5;40;1;31m\033[44;1H TAPEZ 'q' pour quitter\033[0m\n");
 } while(key_pressed()!=113);
