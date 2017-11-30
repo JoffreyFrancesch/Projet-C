@@ -13,7 +13,7 @@ MAPTAILLE getTaille(char* filename) {
 	if (fichier == NULL) printf("ERREUR\n");
 
 	while ((c = fgetc(fichier)) != EOF) {
-		
+
 		if (taille.hauteur == 0) {
 			taille.largeur++;
 		}
@@ -27,7 +27,7 @@ MAPTAILLE getTaille(char* filename) {
 	return taille;
 }
 
-void initierMatrice(int** matrice, char* filename, MAPTAILLE taille) {
+void initMatrice(int** matrice, char* filename, MAPTAILLE taille) {
 	FILE *fichier;
 	int c;
 	int i = 0, j = 0;

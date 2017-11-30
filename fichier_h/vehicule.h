@@ -19,11 +19,8 @@ typedef struct avion AVION;
 struct voiture {
 	char direction;
 	int posx, posy;
-	int vistesse;
-	char type;
 	char etat;
 	int temps;
-	int essence;
 	POINT_ALEATOIRE* entree;
 	struct voiture *next;
 	int tempPanne;
@@ -73,9 +70,9 @@ struct pointEntree {
 struct feux {
 	int x, y;
 	char direction;
-	char etat; //r -> rouge, v -> vert
-	int portee; // nombre de carres affectes par a feux
-	int compteur; //compter le temp de feux
+	char etat; //r -> rouge, b -> vert
+	int portee; // nombre de carres affectes par les feux
+	int compteur; //compter le temps de feux
 	FEUX* next;
 };
 
@@ -105,7 +102,6 @@ void deplacementVoiture(VOITURE* voitures, CALCUL_POINT_ALEATOIRE* listEntrees, 
 void feuxVert(FEUX* feux, char** occupee, MAPTAILLE taille);
 void feuxRouge(FEUX* feux, char** occupee, MAPTAILLE taille);
 void activerFeux(FEUX* feux, char** occupee, MAPTAILLE taille);
-
 VOITURE* CreerListeVoiture(int nombreVoitures, CALCUL_POINT_ALEATOIRE* listeEntrees, char** occupee);
 CHEMIN* TramEntree(int** matrice, MAPTAILLE taille);
 TRAM* CreerTram(int** matrice, MAPTAILLE taille);

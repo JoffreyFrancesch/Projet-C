@@ -13,6 +13,6 @@ struct mapTaille {
 
 
 MAPTAILLE getTaille(char *filename);
-void initierMatrice(int** matrice, char* filename, MAPTAILLE taille);
+void initMatrice(int** matrice, char* filename, MAPTAILLE taille);
 
 char key_pressed();

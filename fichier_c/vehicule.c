@@ -1,24 +1,24 @@
 #include "../fichier_h/vehicule.h"
 
-#define NRM  "\033[0m"
-#define RED  "\033[31m"
-#define YEL  "\033[33m"
-#define BLU  "\033[34m"
-#define GRN  "\033[32m"
-#define BLK  "\033[30m"
+#define NRM  "\033[0m" //BLANC
+#define RED  "\033[31m"//ROUGE
+#define YEL  "\033[33m"//JAUNE
+#define BLU  "\033[34m"//BLEU
+#define GRN  "\033[32m"//VERT
+#define BLK  "\033[30m"//NOIR
 
-int FEUX_DUREE = 15;
-int TEMPS_ATTENTE = 4;
-int PANNE_DUREE = 10;
-int TRAM_ATTENTE = 12;
-int MAX_ESSENCE = 60;
-int TRAM_STOP = 5;
+int FEUX_DUREE = 15;//TEMPS DES FEUX
+int TEMPS_ATTENTE = 4;//TEMPS D'ATTENTE
+int PANNE_DUREE = 10;//TEMPS DE LA PANNE
+int TRAM_ATTENTE = 12;//TEMPS D'ATTENTE TRAM
+int TRAM_STOP = 5;//TEMPS ARRET TRAM
 
 char avionImage[2][11] = {
  	{'|','\\','_','_','_','|','\\','_','_','_',' '},
  	{'|','_','_','_','_','_','_','_','_','_', '\\'}
  };
 
+//suppression de listes des entrees
 void freeListeEntree(ENTREE* liste) {
 	ENTREE* temp = NULL;
 	ENTREE* cour = liste;
@@ -114,6 +114,7 @@ void printCharacterSpe(int c, int terrain) {
 		// Icone pour le tram
 		printf(YEL "▓" NRM);
   } else if (c == '!'){
+    //icone voiture en panne
     printf(BLK "\033[47m✟" NRM);
   } else {//afficher caractère non voiture et non tram
 		printCharacter(c);
@@ -821,7 +822,6 @@ VOITURE* CreerListeVoiture(int nombreVoitures, CALCUL_POINT_ALEATOIRE* listeEntr
 			cour = cour->next;
 		}
 		cour->temps = 0;
-		cour->essence = MAX_ESSENCE;
 		cour->etat = 'm';
 		PositionAleatoire(cour, listeEntrees, occupee);
 		cour->next = NULL;

@@ -65,7 +65,7 @@ int main() {
     } else {
       nombre_Voitures = 40;
     }
-  initierMatrice(matrice, fichier, taille);
+  initMatrice(matrice, fichier, taille);
   CALCUL_POINT_ALEATOIRE* calcul = calculEntrees(matrice, taille);
   FEUX* listeFeux = Feux(matrice, taille);
 
