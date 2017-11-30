@@ -23,7 +23,7 @@ struct voiture {
 	int temps;
 	POINT_ALEATOIRE* entree;
 	struct voiture *next;
-	int tempPanne;
+	int tempsPanne;
 };
 
 struct avion {

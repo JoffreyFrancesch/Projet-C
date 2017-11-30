@@ -757,13 +757,13 @@ void deplacementVoiture(VOITURE* voitures, CALCUL_POINT_ALEATOIRE* listeEntrees,
 				if (Panne() && mode == 2) {
 					voiture->etat = 'p';
 					occupee[voiture->posx][voiture->posy] = 2;
-					voiture->tempPanne = PANNE_DUREE;
+					voiture->tempsPanne = PANNE_DUREE;
 				} else {
 					avancerVoiture(voiture, direction, occupee, taille, matrice);
 				}
 			} else {
-				voiture->tempPanne--;
-				if (voiture->tempPanne == 0) {
+				voiture->tempsPanne--;
+				if (voiture->tempsPanne == 0) {
 					voiture->etat = 'm';
 					occupee[voiture->posx][voiture->posy] = 1;
 				}
