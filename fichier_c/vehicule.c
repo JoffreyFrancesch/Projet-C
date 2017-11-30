@@ -87,7 +87,7 @@ void printCharacter(int c) {
         case 'i':
         case 'k':
 
-        	printf("\033[47m \033[0m");
+        	printf("\033[40m \033[0m");
         	break;
         case 'Q':
         case 'A':

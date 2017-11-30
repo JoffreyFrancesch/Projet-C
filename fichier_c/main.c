@@ -91,6 +91,6 @@ int main() {
   system("clear");
   menu_quitter();
   usleep(5000000);
-
+  system("setterm -cursor on");
   return 0;
 }
