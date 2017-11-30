@@ -87,7 +87,7 @@ void printCharacter(int c);
 void printCharacterSpe(int c, int terrain);
 void afficherPlan(int** matrice, MAPTAILLE taille, int** plan);
 void dessinerAvion(int** matrice, MAPTAILLE taille, AVION* avion);
-void afficherPlan3(int** matrice, MAPTAILLE taille, VOITURE* voitures, FEUX* feux, TRAM* tram, AVION* avion);
+void afficherPlanFinal(int** matrice, MAPTAILLE taille, VOITURE* voitures, FEUX* feux, TRAM* tram, AVION* avion);
 CALCUL_POINT_ALEATOIRE* calculEntrees(int** matrice, MAPTAILLE taille);
 void ValeurDeFeux(FEUX* feux, int x, int y, int** matrice);
 FEUX* Feux(int** matrice, MAPTAILLE taille);

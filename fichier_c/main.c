@@ -12,7 +12,7 @@ int main() {
   int i, j;
   char* fichier = "fichier_txt/map_cp.txt";
 
-  
+
 
   MAPTAILLE taille = getTaille(fichier);
 
@@ -50,7 +50,10 @@ int main() {
         case '3' :
           printf("Vous avez quittez\n");
           flag = 1;
-	  return 0;
+          system("clear");
+          menu_quitter();
+          usleep(5000000);
+	        return 0;
           break;
         default :
           printf("Choix inconnu\n");
@@ -73,8 +76,7 @@ int main() {
 	AVION* avion = CreerAvion(matrice, taille);
 
 
-  afficherPlan3(matrice, taille, setupVoitures, listeFeux, listeTram, avion);
-  //for (i = 0; i < 2000; i++) {
+  afficherPlanFinal(matrice, taille, setupVoitures, listeFeux, listeTram, avion);
   do {
     usleep(200000);
     avancerTram(listeTram, taille, matrice);
@@ -82,13 +84,18 @@ int main() {
     deplacementVoiture(setupVoitures, calcul, matrice, occupee, taille, mode);
     activerFeux(listeFeux, occupee, taille);
     system("Clear");
-    afficherPlan3(matrice, taille, setupVoitures, listeFeux, listeTram, avion);
-  //}
+    afficherPlanFinal(matrice, taille, setupVoitures, listeFeux, listeTram, avion);
+    printf("\033[5;40;1;31m\033[44;1H TAPEZ 'q' pour quitter\033[0m\n");
 } while(key_pressed()!=113);
+
   for (i = 0; i < taille.hauteur; i++) {
 		free(matrice[i]);
 	}
 	free(matrice);
+
+  system("clear");
+  menu_quitter();
+  usleep(5000000);
 
   return 0;
 }

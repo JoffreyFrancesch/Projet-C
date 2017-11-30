@@ -14,9 +14,9 @@ int MAX_ESSENCE = 60;
 int TRAM_STOP = 5;
 
 char avionImage[2][11] = {
-	{'|','\\','_','_','_','|','\\','_','_','_',' '},
-	{'|','_','_','_','_','_','_','_','_','_', '\\'}
-};
+ 	{'|','\\','_','_','_','|','\\','_','_','_',' '},
+ 	{'|','_','_','_','_','_','_','_','_','_', '\\'}
+ };
 
 void freeListeEntree(ENTREE* liste) {
 	ENTREE* temp = NULL;
@@ -28,9 +28,7 @@ void freeListeEntree(ENTREE* liste) {
 	}
 }
 
-/*
- * Check if @c in the string @chaine
-*/
+//Permet de déterminer si c'est une chaine ou un cractère seul
 char checkCharacter(char* chaine, int longeur, char c) {
 	int i;
 	for (i = 0; i < longeur; i++) {
@@ -41,9 +39,7 @@ char checkCharacter(char* chaine, int longeur, char c) {
 	return 0;
 }
 
-/*
- * Check if @num between @a and @b
-*/
+//Permet de checker la portée entre a et b utilisee pour les feux
 char checkPortee(int num, int a, int b) {
 	if (a >= b && a >= num && num >= b){
 		return 1;
@@ -56,6 +52,7 @@ char checkPortee(int num, int a, int b) {
 	return 0;
 }
 
+//Permet d'afficher les caractere non specifique
 void printCharacter(int c) {
 	switch (c) {
       	case 'H' : printf("═"); break;
@@ -77,7 +74,7 @@ void printCharacter(int c) {
       	case 'j' : printf("┴"); break;
       	case 'E' : printf("█"); break;
       	case 'v' : printf("┼"); break;
-      	case 'm' : printf("║"); break;
+      	case 'm' : printf("\033[46m║\033[0m"); break;
       	case 'G' : printf("▒"); break;
       	case 'P' : printf(GRN "♣" NRM); break;
         case 'l':
@@ -101,30 +98,26 @@ void printCharacter(int c) {
         	printf(RED "█" NRM);
         	break;
         case 'B':// Feux bleu
-        	printf(BLU "█" NRM);
+        	printf(GRN "█" NRM);
         	break;
       default : printf("%c",c);
     }
 }
 
-/*
- * Remplacer $ par le icon de voiture
-*/
+//Permet d'afficher les caractère spécique des voitures et tram
 void printCharacterSpe(int c, int terrain) {
 	if (c == '$') {
-		//Icon for car
-		printf(RED "\033[47m⊡" NRM);
+		//Icone pour la voiture
+		printf(RED "\033[47m▣" NRM);
 	} else if (c == '%') {
-		// Icon for train
+		// Icone pour le tram
 		printf(YEL "▓" NRM);
-	} else {
+	} else {//afficher caractère non voiture et non tram
 		printCharacter(c);
 	}
 }
 
-/*
- * Afficher map
-*/
+//Afficher la map
 void afficherPlan(int** matrice, MAPTAILLE taille, int** plan) {
 	int i, j;
 	for (i = 0; i < taille.hauteur; i++) {
@@ -134,7 +127,7 @@ void afficherPlan(int** matrice, MAPTAILLE taille, int** plan) {
 		printf("\n");
 	}
 }
-
+//Dessiner Avion
 void dessinerAvion(int** matrice, MAPTAILLE taille, AVION* avion) {
 	if (avion != NULL){
 		int i, j;
@@ -151,10 +144,8 @@ void dessinerAvion(int** matrice, MAPTAILLE taille, AVION* avion) {
 	}
 }
 
-/*
- * Assembler le map, des voiture, des feux, des trams dans une seule matrix
-*/
-void afficherPlan3(int** matrice, MAPTAILLE taille, VOITURE* voitures, FEUX* feux, TRAM* tram, AVION* avion) {
+//Afficher la map final avec voiture , tram, feux, et avion
+void afficherPlanFinal(int** matrice, MAPTAILLE taille, VOITURE* voitures, FEUX* feux, TRAM* tram, AVION* avion) {
 	int i, j;
 	int** planAAficher = (int**) malloc(taille.hauteur * sizeof(int*));
 	for (i = 0; i < taille.hauteur; i++) {
@@ -221,9 +212,7 @@ void afficherPlan3(int** matrice, MAPTAILLE taille, VOITURE* voitures, FEUX* feu
 	free(planAAficher);
 }
 
-/*
- * Chercher tous les entrees possibles de plan
-*/
+//Calculer tout les entrées possibles
 CALCUL_POINT_ALEATOIRE* calculEntrees(int** matrice, MAPTAILLE taille) {
 	ENTREE* tete = NULL;
 	ENTREE* cour = NULL;
@@ -321,9 +310,7 @@ CALCUL_POINT_ALEATOIRE* calculEntrees(int** matrice, MAPTAILLE taille) {
 	return calcul;
 }
 
-/*
- * Mettre des infos de feux. Calculer le range que cette feux peut affecter
-*/
+//Permet de calculer le rayon d'action des feux
 void ValeurDeFeux(FEUX* feux, int x, int y, int** matrice) {
 	feux->x = x;
 	feux->y = y;
@@ -358,9 +345,7 @@ void ValeurDeFeux(FEUX* feux, int x, int y, int** matrice) {
 	feux->portee = portee;
 }
 
-/*
- * Get traffic light, which is indicated by 'B' for blue and 'R' for red
-*/
+//Permet de mettre l'etat des feux R -> rouge B -> vert
 FEUX* Feux(int** matrice, MAPTAILLE taille) {
 	FEUX* tete = NULL;
 	FEUX* cour = NULL;
@@ -388,21 +373,20 @@ FEUX* Feux(int** matrice, MAPTAILLE taille) {
 	return tete;
 }
 
+//Calcul un nombre aléatoire utiliser pour le choix de direction des voiture
 int nbAleatoire(int nb) {
 	return rand() % nb;
 }
 
-/*
- * Faire aleatoire si une voiture est en panne. La possibilite d'une voiture etre en panne est de 1/20 chance
-*/
+//Faire tomber en panne une voiture avec probabilité de 1/20
 int Panne() {
 	int i = rand() % 20;
-	return i > 0 ? 0 : 1;
+	return i > 0 ? 0 : 1;//return i si i > 0 return 1 si i = 0
 }
 
 /*
- * Mettre une voiture a l'entree. Si tous les entrees sont occupees, la voiture doit attendre une duree de @TEMP_ATTENDS
- * Apres cette duree, si il n'y a pas une entree disponible, la voiture doit attendre jusqu'a ce qu'il y ait une antree disponible
+ * Mettre une voiture a l'entree. Si tous les entrees sont occupees, la voiture doit attendre une duree de TEMPS_ATTENTE
+ * Apres cette duree, si il n'y a pas une entree disponible, la voiture doit attendre jusqu'a ce qu'il y ait une disponible
 */
 void PositionAleatoire(VOITURE* voiture, CALCUL_POINT_ALEATOIRE* listeEntrees, char** occupee) {
 	int i;
@@ -441,9 +425,7 @@ void PositionAleatoire(VOITURE* voiture, CALCUL_POINT_ALEATOIRE* listeEntrees, c
 	}
 }
 
-/*
- * Make the current car avoid the car ahead if its en panne
-*/
+//Eviter une voiture en panne
 void eviterPanne(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matrice) {
 	int posx = voiture->posx, posy = voiture->posy;
 	printf("EVITER\n");
@@ -515,6 +497,7 @@ void eviterPanne(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matri
 
 }
 
+//Deplacer la voiture vers le haut
 void AllerEnHaut(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matrice) {
 	int newX = voiture->posx, newY = voiture->posy;
 	char eviter = 0;
@@ -528,8 +511,8 @@ void AllerEnHaut(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matri
 				voiture->entree->occupee = 0;
 				voiture->entree = NULL;
 			}
-		} else { // Si la carre a l'avance est occupee
-			if (occupee[newX - 1][newY] == 1) { // Dans le cas de feux rouge
+		} else { // Si le carre devant est occupee
+			if (occupee[newX - 1][newY] == 1) { // Dans le cas du feux rouge
 				voiture->etat = 's';
 			} else if (occupee[newX - 1][newY] == 2) { // Dans le cas d'une voiture devant est en panne
 				eviter = 1;
@@ -552,11 +535,12 @@ void AllerEnHaut(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matri
 	voiture->direction = 'u';
 }
 
+//Déplacer la voiture vers le bas
 void AllerEnBas(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matrice) {
 	int newX = voiture->posx, newY = voiture->posy;
 	char eviter = 0;
 	if (newX < taille.hauteur - 1) {
-		// Si la carre a l'avance n'est pas occupee
+		// Si la position de devant n'est pas occupee
 		if (!occupee[newX + 1][newY]) {
 			occupee[newX][newY] = 0;
 			newX++;
@@ -566,8 +550,8 @@ void AllerEnBas(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matric
 				voiture->entree->occupee = 0;
 				voiture->entree = NULL;
 			}
-		} else { // Si la carre a l'avance est occupee
-			if (occupee[newX + 1][newY] == 1) { // Dans le cas de feux rouge
+		} else { // Si la position devant est occupee
+			if (occupee[newX + 1][newY] == 1) { // Dans le cas du feux rouge
 				voiture->etat = 's';
 			} else if (occupee[newX + 1][newY] == 2) { // Dans le cas d'une voiture devant est en panne
 				eviter = 1;
@@ -589,6 +573,7 @@ void AllerEnBas(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matric
 	voiture->direction = 'd';
 }
 
+//Deplacement vers la droite
 void AllerADroite(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matrice) {
 	int newX = voiture->posx, newY = voiture->posy;
 	char eviter = 0;
@@ -602,8 +587,8 @@ void AllerADroite(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matr
 				voiture->entree->occupee = 0;
 				voiture->entree = NULL;
 			}
-		} else { // Si la carre a l'avance est occupee
-			if (occupee[newX][newY + 1] == 1) { // Dans le cas de feux rouge
+		} else { //Position de devant est occupee
+			if (occupee[newX][newY + 1] == 1) { // Dans le cas du feux rouge
 				voiture->etat = 's';
 			} else if (occupee[newX][newY + 1] == 2) { // Dans le cas d'une voiture devant est en panne
 				eviter = 1;
@@ -625,7 +610,7 @@ void AllerADroite(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matr
 
 	voiture->direction = 'r';
 }
-
+//Deplacement vers la gauche
 void AllerAGauche(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matrice) {
 	int newX = voiture->posx, newY = voiture->posy;
 	char eviter = 0;
@@ -639,8 +624,8 @@ void AllerAGauche(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matr
 				voiture->entree->occupee = 0;
 				voiture->entree = NULL;
 			}
-		} else { // Si la carre a l'avance est occupee
-			if (occupee[newX][newY - 1] == 1) { // Dans le cas de feux rouge
+		} else { // Si la posistion devant est occupee
+			if (occupee[newX][newY - 1] == 1) { // Dans le cas du feux rouge
 				voiture->etat = 's';
 			} else if (occupee[newX][newY - 1] == 2) { // Dans le cas d'une voiture devant est en panne
 				eviter = 1;
@@ -662,6 +647,7 @@ void AllerAGauche(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matr
 	voiture->direction = 'l';
 }
 
+//Permet de faire avancer la voiture
 void avancerVoiture(VOITURE* voiture, int direction, char** occupee, MAPTAILLE taille, int** matrice) {
 	int posx = voiture->posx, posy = voiture->posy;
 	if (matrice[posx][posy] == 'S'){
@@ -672,7 +658,8 @@ void avancerVoiture(VOITURE* voiture, int direction, char** occupee, MAPTAILLE t
 		voiture->etat = 'h';
 		return;
 	}
-
+  //permet de faire le changement de direction s'il arrive sur un point critique
+  //ou de deplacer normalement vers le bas ou vers le haut
 	switch (direction) {
 	case 'd':
 		AllerEnBas(voiture, occupee, taille, matrice);
@@ -720,9 +707,7 @@ void avancerVoiture(VOITURE* voiture, int direction, char** occupee, MAPTAILLE t
 	}
 }
 
-/*
- * Changer l'etat de feux
-*/
+//Changer l'état des feux
 void changeFeuxEtat(FEUX* feux, char** occupee, MAPTAILLE taille, char bloquee, char etat) {
 	feux->etat = etat;
 	int i, j, k;
@@ -754,9 +739,7 @@ void changeFeuxEtat(FEUX* feux, char** occupee, MAPTAILLE taille, char bloquee, 
 	}
 }
 
-/*
- * Make all car run
-*/
+//deplacement de toute les voitures
 void deplacementVoiture(VOITURE* voitures, CALCUL_POINT_ALEATOIRE* listeEntrees, int** matrice, char** occupee, MAPTAILLE taille, int mode) {
 	VOITURE* voiture = voitures;
 	while (voiture != NULL) {
@@ -785,24 +768,17 @@ void deplacementVoiture(VOITURE* voitures, CALCUL_POINT_ALEATOIRE* listeEntrees,
 	}
 }
 
-/*
- * Feux devient bleu
-*/
+//Feux vert
 void feuxVert(FEUX* feux, char** occupee, MAPTAILLE taille) {
 	changeFeuxEtat(feux, occupee, taille, 0, 'b');
 }
 
-/*
- * Feux devient rouge
-*/
+//Feux rouge
 void feuxRouge(FEUX* feux, char** occupee, MAPTAILLE taille) {
 	changeFeuxEtat(feux, occupee, taille, 1, 'r');
 }
 
-/*
- * La feux marche a cause d'une compteur. Si cette compteur increment jusqu'au la borne superieur @FEUX_DUREE
- * la feux va changer son etat, et la compteur recommence de 0
-*/
+//Controle des feux avec un compteur qui s'incremente pour le changement de couleur du feux
 void activerFeux(FEUX* feux, char** occupee, MAPTAILLE taille) {
 	FEUX* cour = feux;
 	while (cour != NULL) {
@@ -824,9 +800,7 @@ void activerFeux(FEUX* feux, char** occupee, MAPTAILLE taille) {
 }
 
 
-/*
- * Generer list de voitures
-*/
+//Creer la listes des voitures
 VOITURE* CreerListeVoiture(int nombreVoitures, CALCUL_POINT_ALEATOIRE* listeEntrees, char** occupee) {
 	int i;
 	VOITURE* tete = NULL;
@@ -848,9 +822,7 @@ VOITURE* CreerListeVoiture(int nombreVoitures, CALCUL_POINT_ALEATOIRE* listeEntr
 	return tete;
 }
 
-/*
- * Get list of couple (entry, exit)
-*/
+//Calcul des entrees du tram
 CHEMIN* TramEntree(int** matrice, MAPTAILLE taille) {
 	int i, j;
 	POINT* entrees = malloc(2 * sizeof(POINT));
@@ -892,9 +864,7 @@ CHEMIN* TramEntree(int** matrice, MAPTAILLE taille) {
 	return chemin;
 }
 
-/*
- * Create list of train
-*/
+//Creer liste des trams
 TRAM* CreerTram(int** matrice, MAPTAILLE taille) {
 	CHEMIN* chemin = TramEntree(matrice, taille);
 	TRAM* tete = NULL;
@@ -924,11 +894,8 @@ TRAM* CreerTram(int** matrice, MAPTAILLE taille) {
 	return tete;
 }
 
-/*
- * Run the train. If train reach 'a' then stop for a while, then continue
-*/
+//Avancer tram si on rencontre la valeur 'a' le tram marque un arret
 void avancerTram(TRAM* tram, MAPTAILLE taille, int** matrice){
-	//TRAM* current = tram;
 	while(tram != NULL){
 		if (tram->stopTime == 0){
 			if (tram->etat == 'm'){
@@ -940,7 +907,8 @@ void avancerTram(TRAM* tram, MAPTAILLE taille, int** matrice){
 						tram->etat = 'h';
 					} else {
 						if (checkPortee(tram->posx, 0, taille.hauteur-1) && matrice[tram->posx][tram->posy] == 'a'){
-							tram->stopTime = TRAM_STOP;
+              system("play -q fichier_son/sonnette.wav &");
+              tram->stopTime = TRAM_STOP;
 						}
 					}
 				} else if (tram->direction == 'u'){
@@ -952,7 +920,7 @@ void avancerTram(TRAM* tram, MAPTAILLE taille, int** matrice){
 					} else {
 						//Train stop for a while
 						if (checkPortee(tram->posx, 0, taille.hauteur-1) && matrice[tram->posx][tram->posy] == 'a'){
-							//system("play -q fichier_son/sonnette.wav &");
+							system("play -q fichier_son/sonnette.wav &");
 							tram->stopTime = TRAM_STOP;
 						}
 					}
@@ -971,9 +939,7 @@ void avancerTram(TRAM* tram, MAPTAILLE taille, int** matrice){
 	}
 }
 
-/*
- * Create plane with width 11 and height 2. First position lie at 't' character
-*/
+//Creation de l'avion
 AVION* CreerAvion(int** matrice, MAPTAILLE taille) {
 	AVION* avion = NULL;
 	int i, j;
@@ -996,9 +962,7 @@ AVION* CreerAvion(int** matrice, MAPTAILLE taille) {
 	return avion;
 }
 
-/*
- * Make the plane move from left to right
-*/
+//Deplacement de l'avion de gauche vers la droite
 void deplacementAvion(AVION* avion, MAPTAILLE taille){
 	if (avion->temp > 0){
 		avion->temp--;
