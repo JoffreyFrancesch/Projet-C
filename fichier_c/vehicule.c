@@ -109,13 +109,13 @@ void printCharacter(int c) {
 void printCharacterSpe(int c, int terrain) {
 	if (c == '$') {
 		//Icone pour la voiture
-		printf(RED "\033[47m▣" NRM);
+		printf(RED "\033[40m▣" NRM);
 	} else if (c == '%') {
 		// Icone pour le tram
 		printf(YEL "▓" NRM);
   } else if (c == '!'){
     //icone voiture en panne
-    printf(BLK "\033[47m✟" NRM);
+    printf(YEL "\033[40m✟" NRM);
   } else {//afficher caractère non voiture et non tram
 		printCharacter(c);
 	}

@@ -78,7 +78,7 @@ int main() {
   // system("clear");
   afficherPlanFinal(matrice, taille, setupVoitures, listeFeux, listeTram, avion);
   do {
-    usleep(200000);
+    usleep(100000);
     avancerTram(listeTram, taille, matrice);
     deplacementAvion(avion, taille);
     deplacementVoiture(setupVoitures, calcul, matrice, occupee, taille, mode);
