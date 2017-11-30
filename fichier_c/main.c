@@ -8,7 +8,7 @@
 int main() {
   system("clear");
   srand(time(NULL));
-  //system("play -q &");
+  system("setterm -cursor off");
   int i, j;
   char* fichier = "fichier_txt/map_cp.txt";
 
@@ -87,11 +87,6 @@ int main() {
     afficherPlanFinal(matrice, taille, setupVoitures, listeFeux, listeTram, avion);
     printf("\033[5;40;1;31m\033[44;1H TAPEZ 'q' pour quitter\033[0m\n");
 } while(key_pressed()!=113);
-
-  // for (i = 0; i < taille.hauteur; i++) {
-	// 	free(matrice[i]);
-	// }
-	// free(matrice);
 
   system("clear");
   menu_quitter();
