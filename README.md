@@ -42,7 +42,8 @@ Information sur la compilation du projet
 ----------------------------------------
 
 Le projet compile simplement grâce au MakeFile
-```MakeFile
+
+
 all: EXEC LANCEMENT MRPROPRE
 
 load_map.o : fichier_c/load_map.c fichier_h/load_map.h
@@ -66,8 +67,7 @@ LANCEMENT :
 MRPROPRE :
   rm *.o
   rm EXEC
-  clear ```
-
+  clear
 
 Structure du projet
 -------------------
@@ -101,6 +101,6 @@ TODO
 - [x] Affichage de la map
 - [x] Ajout de décoration à la map
 - [x] Tram
-- [X] Avion
-- [X] Voiture
+- [x] Avion
+- [x] Voiture
 - [x] Feux
