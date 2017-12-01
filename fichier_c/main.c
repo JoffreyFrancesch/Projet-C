@@ -22,7 +22,7 @@ int main() {
 	for (i = 0; i < taille.largeur; i++) {
 		occupee[i] = (char*) malloc(taille.largeur * sizeof(char));
 	}
-  //on met la matrice occupee = 0 partout 
+  //on met la matrice occupee = 0 partout
 	for (i = 0; i < taille.hauteur; i++) {
 		for (j = 0; j < taille.largeur; j++) {
 			occupee[i][j] = 0;
@@ -108,6 +108,8 @@ int main() {
   system("clear");
   //menu de remerciement
   menu_quitter();
+  usleep(1000000);
+  printf("\033[32mPar Mehdi Soltana et Joffrey Franceschini\n");
   usleep(5000000);
   system("setterm -cursor on");//réactive le curseur (uniquement ubuntu)
   return 0;
