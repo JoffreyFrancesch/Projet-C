@@ -7,6 +7,17 @@ urbaine. Le projet est à réaliser obligatoirement en binôme (ancien & nouveau
 GNU/Linux. La simulation du trafic doit se faire comme dans la vraie vie. L’affichage doit
 être effectué uniquement sur console.
 
+Touches à connaître :
+---------------------
+
+Il n'y aucune touche spécifique à connaître. Les seules touches qu'il sont à utiliser sont :
+
+  * '1' Dans le menu -> NORMAL
+  * '2' Dans le menu -> DANGER
+  * '3' Dans le menu -> QUITTER
+  * '4' Dans le menu (EASTER EGG) TRY IT
+  * 'q' Dans la simulation -> QUITTER
+
 Screen du Projet
 ----------------
 * Menu
@@ -31,7 +42,8 @@ Information sur la compilation du projet
 ----------------------------------------
 
 Le projet compile simplement grâce au MakeFile
-<pre><code>all: EXEC LANCEMENT MRPROPRE
+```MarkDown
+all: EXEC LANCEMENT MRPROPRE
 
 load_map.o : fichier_c/load_map.c fichier_h/load_map.h
   gcc -c fichier_c/load_map.c -Wall
@@ -54,29 +66,24 @@ LANCEMENT :
 MRPROPRE :
   rm *.o
   rm EXEC
-  clear</code></pre>
+  clear```
 
 Structure du projet
 -------------------
 
 * **Fichier TXT**
-  * map.txt --> carte de l'aéroport
-  * map_cp.txt --> copie de la carte sans déco pour accéder au coordonnées réelle
+  * map_cp.txt --> carte de l'aéroport
 
 * **Fichier .H**
   * load_map.h
   * menu.h
-  * vehicules.h
+  * vehicule.h
 
 * **Fichier .C**
   * load_map.c --> charge la carte dans le terminal
   * menu.c --> charge le menu dans le terminal
-  * vehicules.c --> effectue la simulation
+  * vehicule.c --> effectue la simulation
   * main.c --> lancement de tout les codes
-
-* **Zone de test**
-  * test.c --> fichier de test
-  * lancement_rapide.sh --> compile et lance rapidement
 
 * **MakeFile**
 
@@ -93,8 +100,6 @@ TODO
 - [x] Affichage de la map
 - [x] Ajout de décoration à la map
 - [x] Tram
-- [ ] Avion
-- [ ] Voiture
-- [ ] Parking
-- [ ] Piétons
-- [x] Feu
+- [X] Avion
+- [X] Voiture
+- [x] Feux
