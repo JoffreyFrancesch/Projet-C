@@ -66,7 +66,8 @@ LANCEMENT :
 MRPROPRE :
   rm *.o
   rm EXEC
-  clear```
+  clear ```
+
 
 Structure du projet
 -------------------
