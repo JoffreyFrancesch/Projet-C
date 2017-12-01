@@ -1,5 +1,6 @@
 #include "../fichier_h/load_map.h"
 
+//récupération de la taille de la carte dans le fichier .txt
 MAPTAILLE getTaille(char* filename) {
 	FILE *fichier=NULL;
 	MAPTAILLE taille;
@@ -27,6 +28,7 @@ MAPTAILLE getTaille(char* filename) {
 	return taille;
 }
 
+//permet de mettre la carte dans la matrice defini dans le main
 void initMatrice(int** matrice, char* filename, MAPTAILLE taille) {
 	FILE *fichier;
 	int c;
@@ -44,6 +46,7 @@ void initMatrice(int** matrice, char* filename, MAPTAILLE taille) {
 	fclose(fichier);
 }
 
+//fonction qui permet de faire la condition de sortie de la boucle pour la simulation
 char key_pressed() {
 	struct termios oldterm, newterm;
 	int oldfd;

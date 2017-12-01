@@ -1,4 +1,3 @@
-
 all: EXEC LANCEMENT MRPROPRE
 
 load_map.o : fichier_c/load_map.c fichier_h/load_map.h

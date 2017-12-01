@@ -109,13 +109,13 @@ void printCharacter(int c) {
 void printCharacterSpe(int c, int terrain) {
 	if (c == '$') {
 		//Icone pour la voiture
-		printf(RED "\033[40m▣" NRM);
+		printf(GRN "\033[40m▣" NRM);
 	} else if (c == '%') {
 		// Icone pour le tram
 		printf(YEL "▓" NRM);
   } else if (c == '!'){
     //icone voiture en panne
-    printf(YEL "\033[40m✟" NRM);
+    printf(RED "\033[40m✟" NRM);
   } else {//afficher caractère non voiture et non tram
 		printCharacter(c);
 	}
@@ -436,7 +436,7 @@ void PositionAleatoire(VOITURE* voiture, CALCUL_POINT_ALEATOIRE* listeEntrees, c
 //Eviter une voiture en panne
 void eviterPanne(VOITURE* voiture, char** occupee, MAPTAILLE taille, int** matrice) {
 	int posx = voiture->posx, posy = voiture->posy;
-	printf("EVITER\n");
+	//printf("EVITER\n");/test si evitement est OK
 	if (voiture->direction == 'l') {
 		if ((occupee[posx-1][posy-1] != 2 && checkCharacter("lmaqthsi j", 9, matrice[posx-1][posy-1])) &&
 			(occupee[posx-1][posy] == 0 && checkCharacter("lmaqthsi j", 9, matrice[posx-1][posy]))) {
